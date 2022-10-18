@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+protect_from_forgery with: :null_session
 rescue_from ActiveRecord::RecordNotFound, with: :response_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :response_invalid
 
@@ -8,6 +9,6 @@ rescue_from ActiveRecord::RecordInvalid, with: :response_invalid
     end
 
     def response_invalid(e)
-        render json: {errors: e.errors.full_messages}
+        render json: {errors: e.errors.full_messages},status: :unprocessable_entity
     end
 end
