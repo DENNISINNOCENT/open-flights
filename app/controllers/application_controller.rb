@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-protect_from_forgery with: :null_session
+ protect_from_forgery unless: -> { request.format.json? }
 rescue_from ActiveRecord::RecordNotFound, with: :response_not_found
 rescue_from ActiveRecord::RecordInvalid, with: :response_invalid
 

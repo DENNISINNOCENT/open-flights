@@ -6,12 +6,12 @@ class AirlinesController < ApplicationController
     end
 
     def show
-        airline = find_airlines
+        airline =find_airlines
         render json: airline
     end
 
     def create 
-        airline =airline_params
+        airline =Airline.create(airline_params)
         render json: airline ,status: :created
 
     end
